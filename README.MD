@@ -1,4 +1,6 @@
 # Data Recorder
+[![NPM Publish](https://github.com/shiveshnavin/datarecorder/actions/workflows/main.yml/badge.svg)](https://github.com/shiveshnavin/datarecorder/actions/workflows/main.yml)
+
 A simple library to record data in chunks
 
 ## Requirements
