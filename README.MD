@@ -3,6 +3,7 @@ A simple library to record data in chunks
 
 ## Requirements
 Database connection is required for using `datarecorder`. Refer to [MultiDbOrm](https://github.com/shiveshnavin/multi-db-orm) for more details
+
 Supported databases:
  - MongoDB
  - Google Firestore
