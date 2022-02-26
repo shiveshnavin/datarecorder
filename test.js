@@ -1,4 +1,7 @@
-let records = require('./index')('recordtest')
+
+const { MultiDbORM, FireStoreDB, MongoDB, SQLiteDB, Sync } = require("multi-db-orm");
+
+let records = require('./index')('recordtest', new FireStoreDB('./serviceAccount.json'))
 
 records.init(5);
 

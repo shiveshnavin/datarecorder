@@ -1,19 +1,15 @@
 const fs = require("fs");
 const { MultiDbORM, FireStoreDB, MongoDB, SQLiteDB, Sync } = require("multi-db-orm");
 
-var db;
+module.exports = (recordId, multiDb) => {
+    var db;
 
-if (fs.existsSync('./serviceaccount.json')) {
-    db = new FireStoreDB('./serviceaccount.json');
-}
-else if (process.env.SERIVCE_KEY_OBJ_JSON) {
-    db = new FireStoreDB(JSON.parse(process.env.SERIVCE_KEY_OBJ_JSON));
-}
-else {
-    db = new SQLiteDB('./db.db');
-}
-
-module.exports = (recordId) => {
+    if (multiDb) {
+        db = multiDb
+    }
+    else {
+        db = new SQLiteDB('./db.db');
+    }
 
     let module = {}
     let chunkSize = 100;
@@ -23,11 +19,10 @@ module.exports = (recordId) => {
      * @param {number} persistChunkSize Chunk size to flush
      * @param {MultiDbORM} multiDb Optional MultiDbORM DB instance
      */
-    module.init = function (persistChunkSize, multiDb) {
+    module.init = function (persistChunkSize) {
         if (persistChunkSize)
             chunkSize = persistChunkSize;
-        if (multiDb)
-            db = multiDb
+
         db.create('records', {
             id: recordId,
             recordId: recordId,
