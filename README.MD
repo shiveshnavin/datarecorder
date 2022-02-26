@@ -20,7 +20,7 @@ npm install -s datarecorder
 Initialize with chunk size and multidb database connection.
 
  - chunkSize : Chunk size is the number of records which will be clubbed and flushed to database.
- - db : Optional. A `MultiDbORM` database connection. If db is not passed a local file based sqlite db is used. 
+ - db : Optional. A `MultiDbORM` database connection. If db is not passed, a local file based sqlite db is used. 
 
 Example using SQLite 
  
@@ -47,7 +47,7 @@ messageRecorder.init(chunkSize)
 ```
 
 ### Record data
-After every `chunkSize` records the data will be flushed to database automatically. 
+After every `chunkSize` records the data will be flushed to database automatically. The objects recorded can be heterogenous.
 ```
 messageRecorder.record({
     location:"Home",
@@ -57,6 +57,11 @@ messageRecorder.record({
     location:"Office",
     message:"The wabbit burnt the closet."
 })
+
+let urgentMessage = {
+    imageUrl : 'http://example.com/elephant.png'
+}
+messageRecorder.record(urgentMessage)
 
 ```
 
@@ -70,9 +75,7 @@ Reads the saved records in ascending order of time and returns and array.
 ```
 let messages = await messageRecorder.read()
 console.log('Read', messages.length, 'messages')
-
 ```
-
 
 ### Delete Data
 This will remove all the records for `messageRecorder`
