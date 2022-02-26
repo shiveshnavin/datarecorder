@@ -1,0 +1,23 @@
+{
+  "name": "datarecorder",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shiveshnavin/datarecorder.git"
+  },
+  "author": "Shivesh Navin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shiveshnavin/datarecorder/issues"
+  },
+  "homepage": "https://github.com/shiveshnavin/datarecorder#readme",
+  "dependencies": {
+    "fs": "0.0.1-security",
+    "multi-db-orm": "^1.2.1"
+  }
+}
