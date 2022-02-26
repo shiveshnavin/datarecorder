@@ -72,7 +72,7 @@ messageRecorder.flush()
 ```
 
 ### Read Data
-Reads the saved records in ascending order of time and returns and array.
+Reads the saved records in ascending order of time and returns an array.
 ```
 let messages = await messageRecorder.read()
 console.log('Read', messages.length, 'messages')
