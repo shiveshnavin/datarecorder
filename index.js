@@ -1,7 +1,7 @@
 const fs = require("fs");
 const { MultiDbORM, FireStoreDB, MongoDB, SQLiteDB, Sync } = require("multi-db-orm");
 
-module.exports = (recordId, multiDb) => {
+module.exports = (recordId, multiDb, tableName = 'records') => {
     var db;
 
     if (multiDb) {
@@ -23,7 +23,7 @@ module.exports = (recordId, multiDb) => {
         if (persistChunkSize)
             chunkSize = persistChunkSize;
 
-        db.create('records', {
+        db.create(tableName, {
             id: recordId,
             recordId: recordId,
             timeStamp: Date.now(),
@@ -43,7 +43,7 @@ module.exports = (recordId, multiDb) => {
         chunks = []
         let timeStamp = Date.now();
         let id = `${recordId}_${timeStamp}`
-        await db.insert('records', {
+        await db.insert(tableName, {
             id: id,
             recordId: recordId,
             timeStamp: timeStamp,
@@ -55,7 +55,7 @@ module.exports = (recordId, multiDb) => {
     module.read = async function (id) {
         if (id)
             recordId = id
-        let chunked = await db.get('records', { recordId: recordId })
+        let chunked = await db.get(tableName, { recordId: recordId })
         let records = []
 
         for (let index = 0; index < chunked.length; index++) {
@@ -74,7 +74,7 @@ module.exports = (recordId, multiDb) => {
     module.delete = async function (id) {
         if (id)
             recordId = id
-        await db.delete('records', { recordId: recordId })
+        await db.delete(tableName, { recordId: recordId })
         console.log('Deleted all chunks of', recordId)
     }
 
